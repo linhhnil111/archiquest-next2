@@ -2,7 +2,7 @@
 import Groq from "groq-sdk";
 
 const groq_key = process.env.GROQ;
-const FAL = process.env.FAL;
+const fal_key = process.env.FAL;
 
 const groq = new Groq({
   apiKey: groq_key,
@@ -35,12 +35,12 @@ export async function getGroqCompletion(
 
 //This function makes a request to the FAL api and gets an image.
 export async function generateImageFal(prompt: string, image_size: string) {
-  const response = await fetch(`https://fal.run/fal-ai/metavoice-v1`, {
+  const response = await fetch(`https://fal.run/fal-ai/fast-turbo-diffusion`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: `Key ${FAL}`,
+      Authorization: `Key ${fal_key}`,
     },
     body: JSON.stringify({
       prompt: prompt,
@@ -49,6 +49,7 @@ export async function generateImageFal(prompt: string, image_size: string) {
   });
 
   const responseJSON = await response.json();
+
   //here we would normally save the image to a database and return the url
   return responseJSON?.images[0].url;
 }
@@ -64,7 +65,7 @@ export async function generateVoice(
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: `Key ${FAL}`,
+      Authorization: `Key ${fal_key}`,
     },
     body: JSON.stringify({
       text: text,

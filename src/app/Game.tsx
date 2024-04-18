@@ -43,8 +43,10 @@ export default function Game() {
 
     // generateImage();
 
-    const audio = await generateVoice("hello?");
-    setAudioURL(audio);
+    const url = await generateImageFal("test image", "square");
+    setImg(url);
+    //const audio = await generateVoice(response);
+    //setAudioURL(audio);
     //update your game state however you want
     setScore(newScore);
   }
