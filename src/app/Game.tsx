@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getGroqCompletion, generateImageFal } from "./ai";
+import { getGroqCompletion, generateImageFal, generateVoice } from "./ai";
 import {
   mainGamePrompt,
   describeImagePrompt,
@@ -24,6 +24,7 @@ export default function Game() {
     { text: "Option 1", selected: false },
     { text: "Option 1", selected: false },
   ]);
+  const [audioURL, setAudioURL] = useState<string>("");
 
   async function handleClick() {
     setResponse("Generating...");
@@ -40,8 +41,10 @@ export default function Game() {
       "Update the player score based on the game events. If the player has successfully completed an action, award some points. If they failed, deduct some points. Only output the new score value with no explanation or other characters."
     );
 
-    generateImage();
+    // generateImage();
 
+    const audio = await generateVoice("hello?");
+    setAudioURL(audio);
     //update your game state however you want
     setScore(newScore);
   }
@@ -102,6 +105,7 @@ export default function Game() {
       </div>
       <p className="py-2">{response}</p>
       <img src={img} />
+      <audio src={audioURL} controls />
     </div>
   );
 }

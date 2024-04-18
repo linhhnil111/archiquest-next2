@@ -35,8 +35,7 @@ export async function getGroqCompletion(
 
 //This function makes a request to the FAL api and gets an image.
 export async function generateImageFal(prompt: string, image_size: string) {
-  console.log("getting image");
-  const response = await fetch(`https://fal.run/fal-ai/fast-turbo-diffusion`, {
+  const response = await fetch(`https://fal.run/fal-ai/metavoice-v1`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -50,8 +49,33 @@ export async function generateImageFal(prompt: string, image_size: string) {
   });
 
   const responseJSON = await response.json();
-
-  console.log(responseJSON);
   //here we would normally save the image to a database and return the url
   return responseJSON?.images[0].url;
+}
+
+//speaker_url should be a link to a 30 second clip of audio
+export async function generateVoice(
+  text: string,
+  speaker_url: string = "https://cdn.themetavoice.xyz/speakers/bria.mp3"
+) {
+  console.log("generating audio");
+  const response = await fetch(`https://fal.run/fal-ai/metavoice-v1`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Key ${FAL}`,
+    },
+    body: JSON.stringify({
+      text: text,
+      audio_url: speaker_url,
+      speech_stability: 10,
+      speaker_similarity: 4,
+    }),
+  });
+
+  const responseJSON = await response.json();
+  console.log(responseJSON);
+  //here we would normally save the image to a database and return the url
+  return responseJSON?.audio_url.url;
 }
