@@ -15,7 +15,7 @@ type SelectableButton = {
 
 export default function Game() {
   const [prompt, setPrompt] = useState<string>("");
-  const [response, setResponse] = useState<string>(
+  const [keywords, setKeywords] = useState<string>(
     "Your game instructions go here..."
   );
   const [img, setImg] = useState<string>("");
@@ -29,7 +29,7 @@ export default function Game() {
   const [imageGallery, setImageGallery] = useState<string[]>([]);
 
   async function handleClick() {
-    setResponse("Generating...");
+    setKeywords("Generating...");
     const buttonString = await getGroqCompletion(
       prompt,
       128,
@@ -45,7 +45,7 @@ export default function Game() {
   async function generateImage() {
     //Prompt Groq again to get an image description
     const imageDescription = await getGroqCompletion(
-      `Describe an artpiece that includes: ${response}`,
+      `Describe an artpiece that includes: ${keywords}`,
       64,
       describeImagePrompt
     );
@@ -63,7 +63,7 @@ export default function Game() {
       return b;
     });
     setButtonText(newButtons);
-    setResponse(
+    setKeywords(
       buttonText
         .filter((b) => b.selected)
         .map((b) => b.text)
@@ -76,7 +76,7 @@ export default function Game() {
 
     //Prompt Groq again to decide what the new game state should be
     const newScore = await getGroqCompletion(
-      `The player made an artpiece using the following keywords: ${response}.`,
+      `The player made an artpiece using the following keywords: ${keywords}.`,
       4,
       "Give the artwork a score out of 10. Only output the new score value with no explanation or other characters."
     );
@@ -128,7 +128,7 @@ export default function Game() {
           </button>
         ))}
       </div>
-      <p className="py-2">{response}</p>
+      <p className="py-2">{keywords}</p>
       <div className="grid grid-cols-3 w-full gap-4">
         {imageGallery.map((url, i) => (
           <img className="rounded-lg" key={i} src={url} />
