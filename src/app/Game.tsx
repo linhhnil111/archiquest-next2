@@ -40,6 +40,7 @@ export default function Game() {
     );
   }
 
+  //Animation code - if animateImages is true then we call the generateImage function every 5 seconds
   useEffect(() => {
     const interval = setInterval(async () => {
       //Run our generate image function
@@ -73,7 +74,7 @@ export default function Game() {
     });
     setButtonText(newButtons);
     setKeywords(
-      buttonText
+      newButtons
         .filter((b) => b.selected)
         .map((b) => b.text)
         .join(",")
