@@ -15,9 +15,7 @@ type SelectableButton = {
 
 export default function Game() {
   const [prompt, setPrompt] = useState<string>("");
-  const [keywords, setKeywords] = useState<string>(
-    "Your game instructions go here..."
-  );
+  const [keywords, setKeywords] = useState<string>("Selected Keywords...");
   const [img, setImg] = useState<string>("");
   const [score, setScore] = useState<string>("0");
   const [buttonText, setButtonText] = useState<SelectableButton[]>([
@@ -25,7 +23,7 @@ export default function Game() {
     { text: "Option 1", selected: false },
   ]);
   const [audioURL, setAudioURL] = useState<string>("");
-
+  const [animateImages, setAnimateImages] = useState<boolean>(false);
   const [imageGallery, setImageGallery] = useState<string[]>([]);
 
   async function handleClick() {
@@ -41,6 +39,17 @@ export default function Game() {
       buttonOptions.map((text) => ({ text: text, selected: false }))
     );
   }
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      //Run our generate image function
+      if (!animateImages) return;
+      const url = await generateImage();
+      setImg(url);
+    }, 5000); // Update count every second
+
+    return () => clearInterval(interval); // Cleanup to avoid memory leaks if the component unmounts
+  }, [animateImages]);
 
   async function generateImage() {
     //Prompt Groq again to get an image description
@@ -109,6 +118,9 @@ export default function Game() {
         onChange={(e) => setPrompt(e.target.value)}
         placeholder="What do you want to do?"
       />
+      <button className="p-4" onClick={() => setAnimateImages(!animateImages)}>
+        {animateImages ? "Stop Animating" : "Animate"}
+      </button>
       <button className="p-4" onClick={handleClick}>
         Create Options
       </button>
@@ -134,7 +146,7 @@ export default function Game() {
           <img className="rounded-lg" key={i} src={url} />
         ))}
       </div>
-
+      <img src={img} />
       <audio src={audioURL} controls />
     </div>
   );

@@ -80,3 +80,30 @@ export async function generateVoice(
   //here we would normally save the image to a database and return the url
   return responseJSON?.audio_url.url;
 }
+
+//Speech to text with Whisper
+export async function speechToText(
+  audio_url: string = "https://storage.googleapis.com/falserverless/model_tests/whisper/dinner_conversation.mp3"
+) {
+  console.log("generating audio");
+  const response = await fetch(`https://fal.run/fal-ai/whisper`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Key ${fal_key}`,
+    },
+    body: JSON.stringify({
+      audio_url: audio_url,
+      task: "transcribe",
+      chunk_level: "segment",
+      version: "3",
+      batch_size: 64,
+    }),
+  });
+
+  const responseJSON = await response.json();
+  console.log(responseJSON);
+  //here we would normally save the image to a database and return the url
+  return responseJSON?.chunks;
+}
