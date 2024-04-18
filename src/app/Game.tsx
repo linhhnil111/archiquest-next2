@@ -2,7 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { getGroqCompletion, generateImageFal } from "./ai";
-import { mainGamePrompt, describeImagePrompt } from "./prompts";
+import {
+  mainGamePrompt,
+  describeImagePrompt,
+  generateButtonPrompt,
+} from "./prompts";
+
+type SelectableButton = {
+  text: string;
+  selected: boolean;
+};
 
 export default function Game() {
   const [prompt, setPrompt] = useState<string>("");
@@ -11,12 +20,19 @@ export default function Game() {
   );
   const [img, setImg] = useState<string>("");
   const [score, setScore] = useState<string>("0");
+  const [buttonText, setButtonText] = useState<SelectableButton[]>([
+    { text: "Option 1", selected: false },
+    { text: "Option 1", selected: false },
+  ]);
 
   async function handleClick() {
     setResponse("Generating...");
-    const response = await getGroqCompletion(prompt, 128, mainGamePrompt);
-    setResponse(response);
+    const response = await getGroqCompletion(prompt, 128, generateButtonPrompt);
 
+    const buttonOptions = response.split(",");
+    setButtonText(
+      buttonOptions.map((text) => ({ text: text, selected: false }))
+    );
     //Prompt Groq again to decide what the new game state should be
     const newScore = await getGroqCompletion(
       `The following text describes the latest events in a game: ${response}. The players current score is: ${score}.`,
@@ -41,17 +57,24 @@ export default function Game() {
     setImg(url);
   }
 
-  /*
-  useEffect(() => {
-    const interval = setInterval(() => {
-      //Run our generate image function
-      generateImage();
-    }, 5000); // Update count every 5 seconds
-    return () => clearInterval(interval);
-  }, [response]);
-*/
+  const handleSelectButton = (buttonIndex: number) => {
+    const newButtons = buttonText.map((b, i) => {
+      if (i === buttonIndex) {
+        return { text: b.text, selected: !b.selected };
+      }
+      return b;
+    });
+    setButtonText(newButtons);
+    setResponse(
+      buttonText
+        .filter((b) => b.selected)
+        .map((b) => b.text)
+        .join(",")
+    );
+  };
+
   return (
-    <div>
+    <div className="flex flex-col">
       <p> Score: {score}</p>
       <input
         className="p-2 mr-2"
@@ -59,7 +82,22 @@ export default function Game() {
         onChange={(e) => setPrompt(e.target.value)}
         placeholder="What do you want to do?"
       />
-      <button onClick={handleClick}>Send</button>
+      <button className="p-4" onClick={handleClick}>
+        Send
+      </button>
+      <div className="flex justify-between w-full flex-wrap">
+        {buttonText.map((b, i) => (
+          <button
+            onClick={() => handleSelectButton(i)}
+            key={i}
+            className={`rounded-lg ${
+              b.selected ? "bg-slate-500" : "bg-white"
+            } p-2 hover:shadow m-2`}
+          >
+            {b.text}
+          </button>
+        ))}
+      </div>
       <p className="py-2">{response}</p>
       <img src={img} />
     </div>
