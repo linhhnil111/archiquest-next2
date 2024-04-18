@@ -26,6 +26,8 @@ export default function Game() {
   ]);
   const [audioURL, setAudioURL] = useState<string>("");
 
+  const [imageGallery, setImageGallery] = useState<string[]>([]);
+
   async function handleClick() {
     setResponse("Generating...");
     const response = await getGroqCompletion(prompt, 128, generateButtonPrompt);
@@ -44,7 +46,9 @@ export default function Game() {
     // generateImage();
 
     const url = await generateImageFal("test image", "square");
-    setImg(url);
+
+    setImageGallery((imageGallery) => [...url, imageGallery]);
+
     //const audio = await generateVoice(response);
     //setAudioURL(audio);
     //update your game state however you want
@@ -106,7 +110,12 @@ export default function Game() {
         ))}
       </div>
       <p className="py-2">{response}</p>
-      <img src={img} />
+      <div className="grid grid-cols-3 w-full gap-4">
+        {imageGallery.map((url, i) => (
+          <img className="rounded-lg" key={i} src={url} />
+        ))}
+      </div>
+
       <audio src={audioURL} controls />
     </div>
   );
