@@ -30,42 +30,29 @@ export default function Game() {
 
   async function handleClick() {
     setResponse("Generating...");
-    const response = await getGroqCompletion(prompt, 128, generateButtonPrompt);
+    const buttonString = await getGroqCompletion(
+      prompt,
+      128,
+      generateButtonPrompt
+    );
 
-    const buttonOptions = response.split(",");
+    const buttonOptions = buttonString.split(",");
     setButtonText(
       buttonOptions.map((text) => ({ text: text, selected: false }))
     );
-    //Prompt Groq again to decide what the new game state should be
-    const newScore = await getGroqCompletion(
-      `The following text describes the latest events in a game: ${response}. The players current score is: ${score}.`,
-      4,
-      "Update the player score based on the game events. If the player has successfully completed an action, award some points. If they failed, deduct some points. Only output the new score value with no explanation or other characters."
-    );
-
-    // generateImage();
-
-    const url = await generateImageFal("test image", "square");
-
-    setImageGallery((imageGallery) => [...url, imageGallery]);
-
-    //const audio = await generateVoice(response);
-    //setAudioURL(audio);
-    //update your game state however you want
-    setScore(newScore);
   }
 
   async function generateImage() {
     //Prompt Groq again to get an image description
     const imageDescription = await getGroqCompletion(
-      `Describe a scene using vivid imagery and descriptive language of the following text: ${response}`,
+      `Describe an artpiece that includes: ${response}`,
       64,
       describeImagePrompt
     );
 
     //Generate the image with Fal
     const url = await generateImageFal(imageDescription, "landscape_16_9");
-    setImg(url);
+    return url;
   }
 
   const handleSelectButton = (buttonIndex: number) => {
@@ -84,6 +71,35 @@ export default function Game() {
     );
   };
 
+  const handleCreateImage = async () => {
+    const url = await generateImage();
+
+    //Prompt Groq again to decide what the new game state should be
+    const newScore = await getGroqCompletion(
+      `The player made an artpiece using the following keywords: ${response}.`,
+      4,
+      "Give the artwork a score out of 10. Only output the new score value with no explanation or other characters."
+    );
+
+    // generateImage();
+    const existingImages = imageGallery;
+    existingImages.push(url);
+    setImageGallery(existingImages);
+
+    /*
+    const critique = await getGroqCompletion(
+      `The player made an artpiece using the following keywords: ${response}.`,
+      64,
+      "Critique the merit of the artwork"
+    );
+
+    //const audio = await generateVoice(critique);
+    //setAudioURL(audio);
+    */
+    //update your game state however you want
+    setScore(newScore);
+  };
+
   return (
     <div className="flex flex-col">
       <p> Score: {score}</p>
@@ -94,7 +110,10 @@ export default function Game() {
         placeholder="What do you want to do?"
       />
       <button className="p-4" onClick={handleClick}>
-        Send
+        Create Options
+      </button>
+      <button className="p-4" onClick={handleCreateImage}>
+        Create Image
       </button>
       <div className="flex justify-between w-full flex-wrap">
         {buttonText.map((b, i) => (
