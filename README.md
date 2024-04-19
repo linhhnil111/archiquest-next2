@@ -53,7 +53,7 @@ To do this, go back to Github Desktop. You should see some changes highlighted i
 
 Enter a commit message then click commit to confirm your changes.
 
-Then click Push to Remote to save the changes back to github so your teammates can Pull (download) them into their own local copies of the code.
+Then click Push Origin to save the changes back to github so your teammates can Pull (download) them into their own local copies of the code.
 
 ## Incorporating changes from your groupmates (or new updates in this repository)
 
