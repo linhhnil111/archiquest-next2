@@ -1,37 +1,6 @@
 "use server";
-import Groq from "groq-sdk";
 
-const groq_key = process.env.GROQ;
 const fal_key = process.env.FAL;
-
-const groq = new Groq({
-  apiKey: groq_key,
-});
-
-//These functions are running on our nextJS server. We can make requests to resources
-//And securely store our API keys and secrets.
-
-//We can call the Groq API and pass our user prompt, max tokens and system prompt.
-export async function getGroqCompletion(
-  userPrompt: string,
-  max_tokens: number,
-  systemPrompt: string = ""
-) {
-  const completion = await groq.chat.completions.create({
-    messages: [
-      { role: "system", content: systemPrompt },
-      {
-        role: "user",
-        content: userPrompt,
-      },
-    ],
-    model: "mixtral-8x7b-32768",
-    max_tokens: max_tokens,
-  });
-  return (
-    completion.choices[0]?.message?.content || "Oops, something went wrong."
-  );
-}
 
 //This function makes a request to the FAL api and gets an image.
 export async function generateImageFal(prompt: string, image_size: string) {
