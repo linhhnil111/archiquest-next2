@@ -77,7 +77,7 @@ export async function generateVoice(
 
   const responseJSON = await response.json();
   console.log(responseJSON);
-  //here we would normally save the image to a database and return the url
+
   return responseJSON?.audio_url.url;
 }
 
@@ -104,6 +104,6 @@ export async function speechToText(
 
   const responseJSON = await response.json();
   console.log(responseJSON);
-  //here we would normally save the image to a database and return the url
+
   return responseJSON?.chunks;
 }
