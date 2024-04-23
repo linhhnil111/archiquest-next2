@@ -1,10 +1,9 @@
 "use server";
 import Groq from "groq-sdk";
 
-const groq_key = process.env.GROQ;
-
 const groq = new Groq({
-  apiKey: groq_key,
+  apiKey: "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",
+  dangerouslyAllowBrowser: true
 });
 
 export type Message = {
