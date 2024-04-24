@@ -87,3 +87,22 @@
     border-color: #ff6347; /* Highlight color change on hover or focus */
     outline: none; /* Remove default outline when focused */
   }
+
+  /* Positioning and styling for the description box */
+.description-box {
+  position: absolute;   /* Position relative to the nearest positioned ancestor */
+  bottom: 0;            /* Align to the bottom of the nearest positioned parent */
+  left: 0;              /* Align to the left of the container */
+  width: 100%;          /* Make it span the full width of its container */
+  background-color: rgba(0, 0, 0, 0.5);  /* Semi-transparent black background */
+  color: white;         /* White text color */
+  text-align: center;   /* Center-align the text */
+  padding: 20px;        /* Padding around the text */
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+/* Specific dimension if needed (optional) */
+/* You can specify fixed height or let it grow based on content */
+.description-box {
+  height: 100px;  /* Fixed height, adjust as necessary */
+}
