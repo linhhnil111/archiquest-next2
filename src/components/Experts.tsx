@@ -59,8 +59,14 @@ export default function Experts({
       </button>
       <div className="flex justify-between w-full flex-wrap">
         {analysis.map((t, i) => (
-          <div key={i} className="rounded-lg bg-white p-2 hover:shadow m-2">
-            {t}
+          <div
+            key={i}
+            className="flex flex-col rounded-lg bg-white p-2 hover:shadow m-2"
+          >
+            <span className="font-semibold my-2">
+              Prompt: {systemPrompts[i]}
+            </span>
+            <span>{t}</span>
           </div>
         ))}
       </div>
