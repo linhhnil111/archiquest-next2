@@ -25,8 +25,6 @@ const systemPrompts = [
 
 //Demo of generating a forecast
 export default function ForecastPage() {
-  //converting the object to a string just because this is a lot more robust for sending to groq and updating.
-  //If you wanted to actually use the object values in the rest of your app you would need to parse the string as JSON.
   const [state, setState] = useState<any>(initState);
 
   function handleResponse(newState: any) {

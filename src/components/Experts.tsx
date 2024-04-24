@@ -19,6 +19,8 @@ export default function Experts({
 
   const runPrompts = async () => {
     setGenerating(true);
+
+    //this makes a groq request for each system prompt
     const responses = await Promise.all(
       systemPrompts.map(async (systemPrompt) => {
         return getGroqCompletion(
@@ -29,6 +31,7 @@ export default function Experts({
       })
     );
 
+    //then we have another function that updates our state based on all of the responses
     const newState = await updateAnalysis(responses);
     setState(newState);
     setAnalysis(responses);
@@ -37,6 +40,7 @@ export default function Experts({
   };
 
   const updateAnalysis = async (analysis: string[]) => {
+    //Dumb system prompt to try to incorporate all of the analysis into the updated state
     const stateString = JSON.stringify(state);
     const newState = await getGroqCompletion(
       `State JSON: ${stateString}, Analysis: ${analysis.join(",")}`,
