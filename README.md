@@ -6,7 +6,7 @@ First, install Visual Studio code, Node.js and Github Desktop if you haven't alr
 
 Then launch Github desktop and go to File -> Clone Repository. Select the URL tab and enter this repositories git url: `https://github.com/gwyllo/archiquest-next.git`.
 
-Then click Open In Visual Studio to launch visual studio and open the project folder. Alternatively, you can launch visual studio and go File -> Open Window and navigate to wherever Github Desktop cloned the code to.
+Then click Open In Visual Studio to launch visual studio and open the project folder. Alternatively, you can launch visual studio and go File -> Open Folder and navigate to wherever Github Desktop cloned the code to.
 
 In Visual Studio, open the Terminal and make sure that npm (the package manage for installing project dependencies) is correctly set up on your machine by running:
 
