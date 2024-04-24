@@ -1,14 +1,32 @@
 import Link from "next/link";
+import "./globals.css";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+    <main className="start-screen">
+      <div className="flex flex-col items-center justify-center h-screen font-tahoma">
+          <h1 className="text-5xl font-bold text-white mb-8" style={{ fontFamily: 'Tahoma, sans-serif', color: 'yellow' }}>
+            REEF EXHIBITION
+          </h1>
+          <h2 className="text-3xl font-bold text-white mb-8" style={{ fontFamily: 'Tahoma, sans-serif', color: 'yellow' }}>
+            A Marine Biologist's Journey
+          </h2>
+          <div className="translucent-box p-8 mb-4 text-lg text-white text-center">
+            <p className="instructions">
+              You are a Marine Biologist on a mission to catalog the amazing biodiversity of the Great Barrier Reef. 
+              Dive into this vibrant underwater world, where every coral garden and school of fish holds new discoveries waiting to be classified. 
+              Unravel the mysteries of this incredible ecosystem one creature at a time. The reef's future rests in your hands as you race to preserve its wonders.
+              Are you ready to become the ultimate custodian of the sea? Grab your dive gear - it's time to explore!
+            </p>
+          </div>
+          <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <Link href="/timelapse">Timelapse Demo </Link>
         <Link href="/artcritic">Art Critic Demo </Link>
         <Link href="/map">Map Demo </Link>
         <Link href="/reef">Reef</Link>
-      </div>
+          </div>
+        </div>
+      
     </main>
   );
 }

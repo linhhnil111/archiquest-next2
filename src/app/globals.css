@@ -23,3 +23,32 @@ body {
     text-wrap: balance;
   }
 }
+
+.start-screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh; /* Full viewport height */
+  background-size: cover; /* Cover the entire container with the background image */
+  background-repeat: no-repeat; /* Prevent background image from repeating */
+  background-position: center; /* Center the background image horizontally */
+  background-image: url('https://r2.erweima.ai/midjourney/1713864787_45479863287c45499f5f0c02b4f037f0.png');
+}
+
+.instructions-map-text {
+  top: 7vh; /* Adjust top margin as needed */
+  font-size: 1vw; /* Adjust font size relative to the viewport width */
+}
+
+.translucent-box, .translucent-box2, .translucent-box3 {
+  background-color: rgb(21, 49, 76, 0.7); /* Adjust the opacity (last value) to set the translucency level */
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px; /* Add margin-bottom to create a gap between translucent boxes */
+  overflow: auto;
+  object-fit: contain; /* Ensure the image maintains its aspect ratio */
+}
