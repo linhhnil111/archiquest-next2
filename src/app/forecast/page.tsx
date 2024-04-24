@@ -50,7 +50,7 @@ export default function ForecastPage() {
           <Experts
             initState={state}
             systemPrompts={systemPrompts}
-            maxTokens={512}
+            maxTokens={256}
             handleResponse={handleResponse}
           />
         </div>

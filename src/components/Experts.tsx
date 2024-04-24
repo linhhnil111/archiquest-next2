@@ -16,18 +16,16 @@ export default function Experts({
   const [state, setState] = useState<any>(initState);
   const [analysis, setAnalysis] = useState<string[]>([]);
   const [generating, setGenerating] = useState<boolean>(false);
-  //run the prompts
 
   const runPrompts = async () => {
     setGenerating(true);
     const responses = await Promise.all(
       systemPrompts.map(async (systemPrompt) => {
-        const response = await getGroqCompletion(
+        return getGroqCompletion(
           JSON.stringify(state),
           maxTokens,
           systemPrompt
         );
-        return response;
       })
     );
 

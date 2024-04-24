@@ -40,7 +40,6 @@ export async function getGroqCompletion(
   if (jsonOnly) body.response_format = { type: "json_object" };
 
   const completion = await groq.chat.completions.create(body);
-  console.log(completion);
   return (
     completion.choices[0]?.message?.content || "Oops, something went wrong."
   );
