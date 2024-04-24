@@ -34,7 +34,7 @@ export async function getGroqCompletion(
         content: userPrompt,
       },
     ],
-    model: "mixtral-8x7b-32768",
+    model: "llama3-70b-8192",
     max_tokens: max_tokens,
   } as GroqRequest;
   if (jsonOnly) body.response_format = { type: "json_object" };
@@ -50,7 +50,7 @@ export async function getGroqCompletion(
 export async function getGroqChat(max_tokens: number, messages: Message[]) {
   const completion = await groq.chat.completions.create({
     messages: messages,
-    model: "mixtral-8x7b-32768",
+    model: "llama3-70b-8192",
     max_tokens: max_tokens,
   });
   return (
