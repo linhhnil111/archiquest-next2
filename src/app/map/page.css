@@ -1,0 +1,17 @@
+.game-container {
+    background-image: url('https://r2.erweima.ai/midjourney/1713864574_24953fcb5b334147936fdead86a911fb.png');
+  }
+  
+  .container {
+    position: relative;
+    width: calc(100vh * aspect-ratio); /* Set the width based on the aspect ratio */
+    height: 100vh; /* Set the container height to 100% of the viewport height */
+    max-width: 100%; /* Ensure the container doesn't exceed the viewport width */
+    margin: 0 auto; /* Center the container horizontally */
+  }
+  
+  .background-map {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensure the image maintains its aspect ratio */
+  }

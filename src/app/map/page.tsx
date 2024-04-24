@@ -1,6 +1,7 @@
 "use client";
 import Chart, { Location } from "@/components/Chart";
 import { useState } from "react";
+import './page.css';
 
 //Demo of generating a map of coordinates that can be selected
 export default function MapPage() {
@@ -21,14 +22,25 @@ export default function MapPage() {
             placeholder="What do you want to do?"
           />
           <button className="p-4" onClick={() => setMapPrompt(mapDescription)}>
-            Create Map
+            Explore 
           </button>
+          <div>
+          {/* Background Map Image */}
+          
+          <div className="image-container" >
+          <img
+            className="background-image"
+            src="https://r2.erweima.ai/midjourney/1713864574_24953fcb5b334147936fdead86a911fb.png"
+            alt="Reef View"
+          />
+          </div>
           <span className="text-xl">{selectedLocation?.description}</span>
           <Chart
             prompt={mapPrompt}
             onSelect={(location: Location) => setSelectedLocation(location)}
           />
         </div>
+      </div>
       </div>
     </main>
   );
