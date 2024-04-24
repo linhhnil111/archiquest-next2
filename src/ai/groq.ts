@@ -45,6 +45,10 @@ export async function getGroqCompletion(
   );
 }
 
+const systemPrompt = "You are a biologist, guiding a player through a fantasy under the sea";
+
+
+
 //We can call the Groq API and pass our user prompt, max tokens and system prompt.
 export async function getGroqChat(max_tokens: number, messages: Message[]) {
   const completion = await groq.chat.completions.create({

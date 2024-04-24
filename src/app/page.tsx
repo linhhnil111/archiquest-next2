@@ -23,7 +23,9 @@ export default function Home() {
         <Link href="/timelapse">Timelapse Demo </Link>
         <Link href="/artcritic">Art Critic Demo </Link>
         <Link href="/map">Map Demo </Link>
-        <Link href="/reef">Reef</Link>
+        <Link href="/reef" passHref>
+        <button className="reef-button">Start Game</button>
+        </Link>
           </div>
         </div>
       

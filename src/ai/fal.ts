@@ -16,8 +16,16 @@ export async function generateImageFal(prompt: string, image_size: string) {
       image_size: image_size,
     }),
   });
-
+  if (!response.ok) {
+    console.error(`API call failed with status ${response.status}: ${response.statusText}`);
+    return null;
+  }
   const responseJSON = await response.json();
+  console.log(responseJSON);
+  if (!responseJSON?.images || responseJSON.images.length === 0) {
+    console.log('No images found or invalid response structure.');
+    return null;
+  }
 
   //here we would normally save the image to a database and return the url
   return responseJSON?.images[0].url;
