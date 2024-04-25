@@ -1,7 +1,6 @@
 "use server";
 
-const fal_key = '8961de18-583c-48d8-81fe-bcb90fd63dc8:e4526ed7d62c69c2bb88fa2d4f93efc1';
-
+const fal_key = process.env.FAL;
 
 //This function makes a request to the FAL api and gets an image.
 export async function generateImageFal(prompt: string, image_size: string) {

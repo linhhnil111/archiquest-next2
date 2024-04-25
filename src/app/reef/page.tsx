@@ -34,13 +34,10 @@ export default function MapPage() {
     setResponse("Generating description...");
     try {
       const description = await getGroqCompletion(prompt, 64); // Fetch description using GROQ
-      setResponse(description);
-      if (description) {
-        const imageUrl = await generateImageFal(description, "landscape_16_9");
-        setImg(imageUrl); // Update the state with the new image URL
-        const audioUrl = await generateVoice(description);
-        setResponseAudio(audioUrl); // Set the fetched audio URL
-      }
+      setResponse(description); // Set the fetched description as response
+
+      const imageUrl = await generateImageFal(description, "landscape_16_9"); // Generate image from the description
+      setImg(imageUrl); // Update the state with the new image URL
     } catch (error) {
       setResponse("Failed to fetch description and generate image.");
       console.error("Error:", error);
@@ -79,9 +76,7 @@ export default function MapPage() {
         <div className="description-box">
           <span className="text-xl">{response}</span>
         </div>
-        {responseAudio && (
-            <audio className="audio-player" controls src={responseAudio} />
-          )}
+        
         {img && <img src={img} alt="Generated from description" />}
       </div>
     </main>

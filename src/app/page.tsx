@@ -21,9 +21,13 @@ export default function Home() {
           </div>
           <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <Link href="/artcritic">Art Critic Demo </Link>
-        <Link href="/reef" passHref>
-        <button className="reef-button">Start Game</button>
-        </Link>
+        <div className="button-container w-full flex justify-center">
+          <Link href="/reef" passHref>
+            <button className="reef-button text-center px-6 py-3 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600">
+              Start Game
+            </button>
+          </Link>
+        </div>
           </div>
         </div>
         <audio autoPlay loop>
