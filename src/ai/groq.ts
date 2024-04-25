@@ -33,13 +33,12 @@ export async function getGroqCompletion(
         content: userPrompt,
       },
     ],
-    model: "mixtral-8x7b-32768",
+    model: "llama3-70b-8192",
     max_tokens: max_tokens,
   } as GroqRequest;
   if (jsonOnly) body.response_format = { type: "json_object" };
 
   const completion = await groq.chat.completions.create(body);
-  console.log(completion);
   return (
     completion.choices[0]?.message?.content || "Oops, something went wrong."
   );
@@ -53,7 +52,7 @@ const systemPrompt = "You are a biologist, guiding a player through a fantasy un
 export async function getGroqChat(max_tokens: number, messages: Message[]) {
   const completion = await groq.chat.completions.create({
     messages: messages,
-    model: "mixtral-8x7b-32768",
+    model: "llama3-70b-8192",
     max_tokens: max_tokens,
   });
   return (
