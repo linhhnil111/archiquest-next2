@@ -6,7 +6,7 @@ export default function Home() {
     <main className="start-screen">
       <div className="flex flex-col items-center justify-center h-screen font-tahoma">
           <h1 className="text-5xl font-bold text-white mb-8" style={{ fontFamily: 'Tahoma, sans-serif', color: 'yellow' }}>
-            REEF EXHIBITION
+            REEF EXPEDITION
           </h1>
           <h2 className="text-3xl font-bold text-white mb-8" style={{ fontFamily: 'Tahoma, sans-serif', color: 'yellow' }}>
             A Marine Biologist's Journey
@@ -20,15 +20,16 @@ export default function Home() {
             </p>
           </div>
           <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <Link href="/timelapse">Timelapse Demo </Link>
         <Link href="/artcritic">Art Critic Demo </Link>
-        <Link href="/map">Map Demo </Link>
         <Link href="/reef" passHref>
         <button className="reef-button">Start Game</button>
         </Link>
           </div>
         </div>
-      
+        <audio autoPlay loop>
+        <source src="/path/to/your/background-music.mp3" type="audio/mpeg" />
+        Your browser does not support the audio tag.
+      </audio>
     </main>
   );
 }
