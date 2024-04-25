@@ -12,13 +12,13 @@ interface ButtonInfo {
   y: string;
 }
 const buttonsInfo = [
-  { name: "Clownfish", prompt: "Describe a Clownfish and share a fun fact.", x: '11%', y: '49%' },
+  { name: "Surgeonfish", prompt: "Describe a Surgeonfish and share a fun fact.", x: '11%', y: '49%' },
   { name: "Coral Trout", prompt: "Provide details about Coral Trout's habitat.", x: '76%', y: '47%' },
   { name: "Parrotfish", prompt: "Explain the role of Parrotfish in coral reefs.", x: '29%', y: '39%' },
   { name: "Angelfish", prompt: "Describe Angelfish interactions with other fish.", x: '38%', y: '35.5%' },
-  { name: "Surgeonfish", prompt: "What is unique about Surgeonfish’s diet?", x: '60%', y: '50%' },
-  { name: "Seahorse", prompt: "Highlight interesting facts about Seahorse reproduction.", x: '40%', y: '75%' },
-  { name: "Turtle", prompt: "Discuss threats facing marine Turtles today.", x: '67%', y: '83%' },
+  { name: "Turtle", prompt: "What is unique about Turtle’s diet?", x: '60%', y: '50%' },
+  { name: "Coral", prompt: "Tell a imagination story of Coral world.", x: '40%', y: '75%' },
+  { name: "Coral", prompt: "Tell a imagination story , Coral is narrative living under the sea", x: '67%', y: '83%' },
   { name: "Coral", prompt: "Describe the life cycle of Coral.", x: '95%', y: '69%' }
 ];
 
@@ -47,20 +47,18 @@ export default function MapPage() {
 
   return (
     <main className="fullscreen-bg">
-      <div className="content-container flex flex-col items-center justify-center h-screen font-tahoma">
-        
-        <h1 className="quest-map-text text-5xl font-bold text-white mb-8">
+    <div className="content-container flex flex-col items-center justify-center h-screen font-tahoma">
+      
+      <div className="translucent-box p-8 mb-4 text-lg text-white text-center w-full">
+        <h1 className="quest-map-text text-5xl font-bold mb-8">
           REEF VIEW
         </h1>
-        <div className="instructions-map-text translucent-box2 p-8 mb-4 text-lg text-white text-center">
-          <p>
-            Get ready to dive into an underwater adventure..Click on the dots overlaying the vivid scenes from the Great Barrier Reef. With each click, you'll summon a detailed description of one of the amazing creatures living in this colorful ecosystem.
-            Listen carefully as the narrator unveils the species' identifying characteristics, then accurately log the creature in your digital taxonomy collection.
-            The more species descriptions you correctly document, the more complete your catalog of reef biodiversity will become. Let your adventure of discovery begin!
-          </p>
-        </div>
-        
-       
+        <p className="instructions">
+          Get ready to dive into an underwater adventure. Click on the dots overlaying the vivid scenes from the Great Barrier Reef. With each click, you'll summon a detailed description of one of the amazing creatures living in this colorful ecosystem.
+          Listen carefully as the narrator unveils the species' identifying characteristics, then accurately log the creature in your digital taxonomy collection.
+          The more species descriptions you correctly document, the more complete your catalog of reef biodiversity will become. Let your adventure of discovery begin!
+        </p>
+      </div>
       <div className="map-buttons">
           {buttonsInfo.map((button, index) => (
             <button

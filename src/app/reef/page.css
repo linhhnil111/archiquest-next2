@@ -1,41 +1,39 @@
 .start-screen {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh; /* Full viewport height */
-    background-size: cover; /* Cover the entire container with the background image */
-    background-repeat: no-repeat; /* Prevent background image from repeating */
-    background-position: center; /* Center the background image horizontally */
-    background-image: url('https://r2.erweima.ai/midjourney/1713864787_45479863287c45499f5f0c02b4f037f0.png');
-  }
-  
-  .quest-map-text, .instructions-map-text {
-    position: absolute; /* Position absolute relative to the parent */
-    top: 2vh; /* Adjust top margin as needed */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Center horizontally */
-    z-index: 1; /* Ensure the text appears above other content */
-    color: white; /* Text color */
-    font-size: 2rem; /* Adjust font size as needed */
-  }
-  
-  .instructions-map-text {
-    top: 7vh; /* Adjust top margin as needed */
-    font-size: 0.7vw; /* Adjust font size relative to the viewport width */
-  }
-  .translucent-box, .translucent-box2, .translucent-box3 {
-    background-color: rgb(21, 49, 76, 0.7); /* Adjust the opacity (last value) to set the translucency level */
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    margin-bottom: 20px; /* Add margin-bottom to create a gap between translucent boxes */
-    overflow: auto;
-    object-fit: contain; /* Ensure the image maintains its aspect ratio */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.translucent-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(21, 49, 76, 0.7);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 10px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.fullscreen-bg {
+  background: url('https://r2.erweima.ai/midjourney/1713864574_24953fcb5b334147936fdead86a911fb.png') no-repeat center center fixed; 
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
   .reef-button {
     background-color: white;
     color: black;
